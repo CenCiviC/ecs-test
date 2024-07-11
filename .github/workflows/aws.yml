@@ -52,6 +52,8 @@ jobs:
           docker build -t $ECR_REPOSITORY .
           docker tag $ECR_REPOSITORY:latest 851725387349.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:latest
           docker push 851725387349.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:latest
+        outputs:
+          image: ${{ steps.build-image.env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:latest
 
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
